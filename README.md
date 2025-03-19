@@ -1,23 +1,63 @@
 # QTM 350 - Quiz 03
 
-## Python Data Wrangling
+## AI-Assisted Programming and Cloud Computing
 
-In this quiz, you will practice how to manipulate data in Python using the Pandas library. You will be looking at a cool dataset of real passwords (made available from actual data breaches) sourced and compiled from [Information is Beautiful](https://informationisbeautiful.net/visualizations/top-500-passwords-visualized/) and contributed to [R's Tidy Tuesday project](https://github.com/rfordatascience/tidytuesday). These passwords are common (that is, "bad") passwords that you should avoid using! But we are going to use this dataset to practice some data wrangling skills.
+In this quiz, you will need to complete two activities. The first involves creating a custom language model using [Ollama](https://ollama.com/). The second involves simple data analysis in Python using [AWS EC2](https://aws.amazon.com/ec2/). Both tasks relate to content covered in lectures 11, 13, 14, and 15.
 
-The dataset is available in this repository as `passwords.csv`. The dataset has the following columns:
+As we have done in previous quizzes, answers must be in a fork of the quiz repository, whose link you should submit on Canvas.
 
-| Variable | Class | Description |
-|:---------|:------|:------------|
-| rank     | int   | Rank of password popularity |
-| password | chr   | Actual text of the password |
-| category | chr   | Password category |
-| value    | int   | Time to crack by online guessing |
-| time     | chr   | Time units (seconds, minutes, hours, days, weeks, months, years) |
-| offline_crack_sec | int | Time to crack by offline cracking in seconds (e.g., using a hash table) |
-| rank_alt | int   | Alternative rank of password popularity |
-| strength | chr   | Password strength (10 = highest, 1 = lowest) |
-| font_size | int   | Font size for word cloud visualisation |
+**Screenshots will not be accepted.** Files and directories uploaded via the GitHub website (without using the terminal) will have points deducted.
 
-Please fork this repository and complete the included Jupyter Notebook with your code and answers. Push your completed notebook to your forked repository and submit the repository link on Canvas.
+## Activity 1: Creating a Custom Language Model with Ollama
 
-Best of luck! 😉
+In this first part of the quiz, you will create a chatbot called `sarcastic` that responds to user questions with sarcasm. The chatbot should be:
+- Extremely sarcastic
+- Subtly rude
+- Reluctantly helpful
+- Use sophisticated vocabulary and grammar
+- Not overly verbose
+- Capable of handling a wide range of topics
+- Able to recognise and respond to sarcasm in user input
+
+1. Fork this repository and clone your fork to your local machine
+2. Inside the `ollama` directory, create a file called `Modelfile` and another called `ollama.md`
+3. Install a base Ollama model. You may use any base model, but `gemma3`, `deepseek-r1` and `llama3.2` are recommended. **Pay attention to model sizes and choose a version suitable for your computer**. Use the smallest version available if in doubt. See available models at <https://ollama.com/models>
+4. Create a Modelfile containing:
+   - `FROM` statement
+   - `PARAMETER` (at minimum `temperature`) 
+   - A detailed `SYSTEM` prompt describing the chatbot's personality and behaviour
+5. Create the chatbot using the `Modelfile`
+6. Test the chatbot using `ollama run sarcastic`. Verify it handles various topics with appropriate sarcasm
+7. In `ollama.md`, document:
+   - Commands used in the process
+   - Two example prompts with the model's responses
+8. Add, commit, and push your changes to your forked repository
+
+## Activity 2: Data Analysis with Python on AWS EC2
+
+In this second part, you will use AWS EC2 to perform simple Python data analysis. The script `weather_analysis.py`  analyses `weather_data.txt` (a fictional city's weather dataset). Both are available in the `aws` directory of this repository. The script:
+
+- Calculates basic statistics
+- Creates a visualisation showing temperature ranges and precipitation over time
+- Saves the plot as `weather_analysis.png`
+
+1. Log into your AWS account and create an EC2 instance with:
+   - Ubuntu Server 24.04 LTS
+   - SSD Volume Type
+   - t2.micro instance type (free tier eligible)
+2. Create an SSH key pair (`.pem`) or use an existing one. Ensure the key pair has the correct permissions with `chmod`
+3. Configure security groups to allow SSH, HTTPS and HTTP access
+4. Allocate at least 15GB disk space
+5. Connect to the instance using `ssh -i <key.pem> ubuntu@<public-ip>`
+6. Update system packages with `apt`
+7. Install required packages: `python3` `python3-pandas`, `python3-matplotlib`, `python3-numpy`, and `python3-seaborn`
+8. From your terminal, upload the files `weather_data.py` and `weather_data.txt` to the EC2 instance using `scp -i <key.pem> <file> <user>@<ip>:<path>`
+9. Run the script `weather_analysis.py` on the EC2 instance using Python
+10. Download the resulting PNG file to your local machine using `scp`
+11. Run the command `cat /etc/os-release > os.txt` and also upload the `os.txt` file to your local machine
+12. Create a directory called `aws` within this repository and place `weather_analysis.png` and `os.txt` inside it
+13. **Terminate the EC2 instance** to avoid charges and **do not include the .pem file in your repository**. The `.pem` file is sensitive and should never be shared publicly
+14. Add, commit, and push your changes
+15. Submit your repository link on Canvas
+
+**Good luck!** 😃
