@@ -11,6 +11,7 @@ As we have done in previous quizzes, answers must be in a fork of the quiz repos
 ## Activity 1: Creating a Custom Language Model with Ollama
 
 In this first part of the quiz, you will create a chatbot called `sarcastic` that responds to user questions with sarcasm. The chatbot should be:
+
 - Extremely sarcastic
 - Subtly rude
 - Reluctantly helpful
@@ -20,11 +21,11 @@ In this first part of the quiz, you will create a chatbot called `sarcastic` tha
 - Able to recognise and respond to sarcasm in user input
 
 1. Fork this repository and clone your fork to your local machine
-2. Inside the `ollama` directory, create a file called `Modelfile` and another called `ollama.md`
+2. Create a directory called `ollama`. Inside the `ollama` directory, create a file called `Modelfile` and another called `ollama.md`
 3. Install a base Ollama model. You may use any base model, but `gemma3`, `deepseek-r1` and `llama3.2` are recommended. **Pay attention to model sizes and choose a version suitable for your computer**. Use the smallest version available if in doubt. See available models at <https://ollama.com/models>
 4. Create a Modelfile containing:
    - `FROM` statement
-   - `PARAMETER` (at minimum `temperature`) 
+   - `PARAMETER` (at minimum `temperature`)
    - A detailed `SYSTEM` prompt describing the chatbot's personality and behaviour
 5. Create the chatbot using the `Modelfile`
 6. Test the chatbot using `ollama run sarcastic`. Verify it handles various topics with appropriate sarcasm
